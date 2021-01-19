@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:contacts/screens/create_contact.dart';
-import 'package:contacts/screens/edit_contacts.dart';
 import 'package:contacts/screens/home.dart';
 import 'package:contacts/widgets/constants.dart';
 import 'package:contacts/widgets/widgets.dart';
@@ -29,7 +28,7 @@ class _ShowContactState extends State<ShowContact> {
   final databaseReference = FirebaseFirestore.instance;
 
   deleteContact() async {
-    databaseReference
+    await databaseReference
         .collection("Contacts")
         .doc(widget.contactId)
         .delete()
@@ -85,51 +84,54 @@ class _ShowContactState extends State<ShowContact> {
                         children: [
                           Container(
                             color: Color(0xffdcdcdc),
-                            child: Image.network(
-                              "${documentData['contactImage']}",
-                              height: 300,
-                              fit: BoxFit.cover,
+                            child: Center(
+                              child: Image.network(
+                                "${documentData['contactImage']}",
+                                height: 320,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 32.0,
-                                bottom: 8.0,
-                                left: 24.0,
-                                right: 24.0),
-                            child: Container(
-                              margin: EdgeInsets.only(bottom: 20),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(right: 20),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(50),
-                                      child: Image.network(
-                                        "${documentData['contactImage']}",
-                                        height: 40,
-                                      ),
+                          Container(
+                            margin: EdgeInsets.only(bottom: 14, left: 44),
+                            child: Row(
+                              children: [
+                                Container(
+                                  height: 40,
+                                  width: 40,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      width: 2,
+                                      color: Colors.white,
+                                    ),
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                  margin: EdgeInsets.only(right: 10),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(50),
+                                    child: Image.network(
+                                      "${documentData['contactImage']}",
+                                      height: 40,
                                     ),
                                   ),
-                                  Text(
-                                    "${documentData['firstName']}" ??
-                                        'First Name',
-                                    style: Constants.boldHeading,
-                                  ),
-                                  SizedBox(width: 3),
-                                  Text(
-                                    "${documentData['middleName']}" ??
-                                        'Middle Name',
-                                    style: Constants.boldHeading,
-                                  ),
-                                  SizedBox(width: 3),
-                                  Text(
-                                    "${documentData['lastName']}" ??
-                                        'Last Name',
-                                    style: Constants.boldHeading,
-                                  ),
-                                ],
-                              ),
+                                ),
+                                Text(
+                                  "${documentData['firstName']}" ??
+                                      'First Name',
+                                  style: Constants.boldHeading,
+                                ),
+                                SizedBox(width: 3),
+                                Text(
+                                  "${documentData['middleName']}" ??
+                                      'Middle Name',
+                                  style: Constants.boldHeading,
+                                ),
+                                SizedBox(width: 3),
+                                Text(
+                                  "${documentData['lastName']}" ?? 'Last Name',
+                                  style: Constants.boldHeading,
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -141,8 +143,8 @@ class _ShowContactState extends State<ShowContact> {
                         ),
                         padding: const EdgeInsets.symmetric(
                             vertical: 16.0, horizontal: 24.0),
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 12.0, vertical: 6),
+                        margin: EdgeInsets.only(
+                            bottom: 6, left: 12, right: 12, top: 40),
                         child: Text(
                           "Email: ${documentData['email']}" ?? 'Email',
                           style: Constants.regularHeading,
@@ -196,12 +198,14 @@ class _ShowContactState extends State<ShowContact> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => CreateContact(
-                                        contactId: widget.contactId,
-                                        document: documentData),
+                                      contactId: widget.contactId,
+                                      document: documentData,
+                                      userId: documentData['userId'],
+                                      contactImage:
+                                          documentData['contactImage'],
+                                    ),
                                   ),
                                 );
-                                // Scaffold.of(context)
-                                //     .showSnackBar(_snackBarAddToSaved);
                               },
                               child: blueButton(
                                 label: 'Edit Contact',
@@ -215,7 +219,6 @@ class _ShowContactState extends State<ShowContact> {
                               child: GestureDetector(
                                 onTap: () async {
                                   deleteContact();
-                                  // await _addToCart();
                                   // Scaffold.of(context)
                                   //     .showSnackBar(_snackBarAddToCard);
                                 },

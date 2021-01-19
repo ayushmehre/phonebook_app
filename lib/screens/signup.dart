@@ -20,23 +20,25 @@ class _SignUpState extends State<SignUp> {
   // Build an alert to show some errors
   Future<void> _alertDialogBuilder(String error) async {
     return showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Error'),
-            content: Container(
-              child: Text(error),
-            ),
-            actions: [
-              FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('Close Dialog'))
-            ],
-          );
-        });
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Error'),
+          content: Container(
+            child: Text(error),
+          ),
+          actions: [
+            FlatButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Close Dialog'),
+            )
+          ],
+        );
+      },
+    );
   }
 
   Future<String> _createAccount() async {
@@ -101,12 +103,6 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // resizeToAvoidBottomPadding: false,
-//      appBar: AppBar(
-//        title: Center(child: buildLogoWidget(context)),
-//        backgroundColor: Colors.transparent,
-//        elevation: 0.0,
-//      ),
       body: _isLoading
           ? Container(
               child: Center(child: CircularProgressIndicator()),
@@ -120,7 +116,6 @@ class _SignUpState extends State<SignUp> {
                   children: [
                     buildLogoWidget(context),
                     SizedBox(height: 30),
-                    // Spacer(),
                     TextFormField(
                       validator: (val) {
                         if (val.isEmpty) {

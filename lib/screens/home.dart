@@ -41,7 +41,7 @@ class _HomeState extends State<Home> {
           }
 
           if (snapshot.connectionState == ConnectionState.done) {
-            // display data in listview
+            // display data in listview User
             return ListView(
               children: snapshot.data.docs.map((document) {
                 return ContactTile(
@@ -145,56 +145,68 @@ class ContactTile extends StatelessWidget {
             ),
           );
         },
-        child: Card(
-          child: Container(
-            padding: EdgeInsets.all(8),
-            child: Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: Image.network(
-                    imgUrl,
-                    width: 45,
-                    height: 45,
-                    fit: BoxFit.cover,
-                  ),
+        child: Container(
+          padding: EdgeInsets.all(8),
+          child: Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: Image.network(
+                  imgUrl,
+                  width: 45,
+                  height: 45,
+                  fit: BoxFit.cover,
                 ),
-                // Text('${userId}'),
-                Container(
-                  margin: EdgeInsets.only(left: 16),
-                  child: Row(
-                    children: [
-                      Text(
-                        fname,
+              ),
+              // Text('${userId}'),
+              Container(
+                margin: EdgeInsets.only(left: 16),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          fname,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black87,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        SizedBox(width: 2),
+                        Text(
+                          mname,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black87,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        SizedBox(width: 2),
+                        Text(
+                          lname,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black87,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        mnumber,
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 14,
                           color: Colors.black54,
-                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                      SizedBox(width: 2),
-                      Text(
-                        mname,
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black54,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      SizedBox(width: 2),
-                      Text(
-                        lname,
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black54,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
+                    )
+                  ],
+                ),
+              )
+            ],
           ),
         ),
       );

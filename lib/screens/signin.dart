@@ -18,24 +18,25 @@ class _SignInState extends State<SignIn> {
 
   Future<void> _alertDialogBuilder(String error) async {
     return showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) {
-          return AlertDialog(
-            title: Text("Error"),
-            content: Container(
-              child: Text(error),
-            ),
-            actions: [
-              FlatButton(
-                child: Text("Close Dialog"),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              )
-            ],
-          );
-        });
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Error"),
+          content: Container(
+            child: Text(error),
+          ),
+          actions: [
+            FlatButton(
+              child: Text("Close Dialog"),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            )
+          ],
+        );
+      },
+    );
   }
 
   // Create a new user account
@@ -57,8 +58,6 @@ class _SignInState extends State<SignIn> {
   }
 
   void _submitForm() async {
-
-
     // Set the form to loading state
     setState(() {
       _loginFormLoading = true;
@@ -75,7 +74,7 @@ class _SignInState extends State<SignIn> {
       setState(() {
         _loginFormLoading = false;
       });
-    }else{
+    } else {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => Home()),

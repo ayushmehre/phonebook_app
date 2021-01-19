@@ -6,7 +6,7 @@ class Constants {
       fontSize: 16.0, fontWeight: FontWeight.w500, color: Colors.black54);
 
   static const boldHeading = TextStyle(
-      fontSize: 22.0, fontWeight: FontWeight.w600, color: Colors.white);
+      fontSize: 22.0, fontWeight: FontWeight.w500, color: Colors.white);
 
   static const normal = TextStyle(
       fontSize: 16.0, fontWeight: FontWeight.w400, color: Colors.black);
